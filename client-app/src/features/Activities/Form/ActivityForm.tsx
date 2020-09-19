@@ -8,13 +8,15 @@ interface IProps {
   activity: IActivity;
   createActivity: (activity: IActivity) => void;
   editActivity: (activity: IActivity) => void;
+  submitting: boolean
 }
 
 export const ActivityForm: React.FC<IProps> = ({
   setEditMode,
   activity: initialFormState,
   createActivity,
-  editActivity
+  editActivity,
+  submitting
 }) => {
   const initializeForm = () => {
     if (initialFormState) {
@@ -85,7 +87,7 @@ export const ActivityForm: React.FC<IProps> = ({
           onChange={handleInputChange}></Form.Input>
         <Form.Input placeholder="Venue" value={activity.venue} name="venue"
           onChange={handleInputChange}></Form.Input>
-        <Button floated="right" positive type="submit" content="Submit" />
+        <Button floated="right" positive type="submit" content="Submit" loading={submitting}/>
         <Button
           floated="right"
           type="button"
